@@ -1,0 +1,33 @@
+{
+  "raceId": "FIX-2026-08-02-FIXMOOR-1420-C3-NOFAV",
+  "dataset": "test-fixture",
+  "testData": true,
+  "source": "test-fixture-generator",
+  "sourceUrl": null,
+  "retrievedAt": "2026-08-02T17:00:00Z",
+  "parserVersion": "fixture-generator-1.0.0",
+  "date": "2026-08-02",
+  "time": "14:20",
+  "course": "Fixmoor (TEST)",
+  "courseRegion": "GB",
+  "raceType": "Flat",
+  "isHandicap": true,
+  "class": 3,
+  "name": "Synthetic Test Handicap (Fixture C, no strong favourite)",
+  "distance": "7f",
+  "going": "Good (fixture)",
+  "declaredRunners": 7,
+  "actualRunners": 7,
+  "resultStatus": "unresolved",
+  "resultsRetrievedAt": null,
+  "runners": [
+    { "runnerNumber": 1, "name": "Fixture Romeo", "status": "runner", "odds": { "fractional": "3/1", "decimal": 4, "capturedAt": "2026-08-02T13:40:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey A", "trainer": "Test Trainer A" },
+    { "runnerNumber": 2, "name": "Fixture Sierra", "status": "runner", "odds": { "fractional": "7/2", "decimal": 4.5, "capturedAt": "2026-08-02T13:40:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey B", "trainer": "Test Trainer B" },
+    { "runnerNumber": 3, "name": "Fixture Tango", "status": "runner", "odds": { "fractional": "4/1", "decimal": 5, "capturedAt": "2026-08-02T13:40:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey C", "trainer": "Test Trainer C" },
+    { "runnerNumber": 4, "name": "Fixture Uniform", "status": "runner", "odds": { "fractional": "5/1", "decimal": 6, "capturedAt": "2026-08-02T13:40:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey D", "trainer": "Test Trainer D" },
+    { "runnerNumber": 5, "name": "Fixture Victor", "status": "runner", "odds": { "fractional": "12/1", "decimal": 13, "capturedAt": "2026-08-02T13:40:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey E", "trainer": "Test Trainer E" },
+    { "runnerNumber": 6, "name": "Fixture Whiskey", "status": "runner", "odds": { "fractional": "16/1", "decimal": 17, "capturedAt": "2026-08-02T13:40:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey F", "trainer": "Test Trainer F" },
+    { "runnerNumber": 7, "name": "Fixture Xray", "status": "runner", "odds": { "fractional": "25/1", "decimal": 26, "capturedAt": "2026-08-02T13:40:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey G", "trainer": "Test Trainer G" }
+  ],
+  "validation": { "status": "passed", "checks": [], "validatedAt": "2026-08-02T17:00:00Z" }
+}

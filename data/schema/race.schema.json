@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/atr-research/schema/race.schema.json",
+  "title": "ATR research race record",
+  "description": "Documentation schema for one race record. Runtime validation is performed by js/core/validate-core.js, which is stricter than this schema.",
+  "type": "object",
+  "required": ["raceId", "date", "course", "courseRegion", "raceType", "isHandicap", "class", "runners", "resultStatus"],
+  "properties": {
+    "raceId": { "type": "string", "pattern": "^[A-Za-z0-9._-]{3,120}$" },
+    "dataset": { "enum": ["published", "test-fixture", "imported"] },
+    "testData": { "type": "boolean" },
+    "source": { "type": ["string", "null"] },
+    "sourceUrl": { "type": ["string", "null"], "format": "uri" },
+    "retrievedAt": { "type": ["string", "null"], "format": "date-time" },
+    "parserVersion": { "type": ["string", "null"] },
+    "date": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "time": { "type": ["string", "null"], "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$" },
+    "course": { "type": "string", "minLength": 1 },
+    "courseRegion": { "type": "string", "minLength": 1 },
+    "raceType": { "enum": ["Flat", "Hurdle", "Chase", "NH Flat", "Unknown"] },
+    "isHandicap": { "type": "boolean" },
+    "class": { "type": "integer", "minimum": 1, "maximum": 8 },
+    "name": { "type": ["string", "null"] },
+    "distance": { "type": ["string", "null"] },
+    "going": { "type": ["string", "null"] },
+    "declaredRunners": { "type": "integer", "minimum": 2 },
+    "actualRunners": { "type": "integer", "minimum": 0 },
+    "resultStatus": { "enum": ["resolved", "partial", "unresolved"] },
+    "resultsRetrievedAt": { "type": ["string", "null"], "format": "date-time" },
+    "revision": { "type": "integer", "minimum": 1 },
+    "updatedAt": { "type": ["string", "null"], "format": "date-time" },
+    "integrity": {
+      "type": "object",
+      "properties": {
+        "structuralHash": { "type": "string" },
+        "snapshotHash": { "type": "string" }
+      }
+    },
+    "validation": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["passed", "failed", "pending"] },
+        "confidence": { "type": "number" },
+        "parserChecks": { "type": "array" },
+        "errors": { "type": "array" },
+        "warnings": { "type": "array" },
+        "validatedAt": { "type": ["string", "null"] }
+      }
+    },
+    "evaluation": {
+      "type": ["object", "null"],
+      "description": "Stored Phase 1 evaluation; current odds are kept separate from historical SP.",
+      "properties": {
+        "rulesetId": { "type": "string" },
+        "rulesetVersion": { "type": "string" },
+        "status": { "enum": ["qualified", "rejected"] },
+        "rejectionCode": { "type": ["string", "null"] },
+        "actualRunners": { "type": "integer" },
+        "candidate": {
+          "type": ["object", "null"],
+          "properties": {
+            "runnerNumber": { "type": "integer" },
+            "name": { "type": "string" },
+            "decimal": { "type": "number" },
+            "fractional": { "type": ["string", "null"] },
+            "tieBreakApplied": { "type": "boolean" }
+          }
+        },
+        "favourite": { "type": ["object", "null"] },
+        "longshots": { "type": "array" },
+        "trace": { "type": "array" }
+      }
+    },
+    "runners": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["runnerNumber", "name", "status"],
+        "properties": {
+          "runnerNumber": { "type": "integer", "minimum": 1 },
+          "name": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["runner", "non_runner"] },
+          "nonRunnerReason": { "type": ["string", "null"] },
+          "jockey": { "type": ["string", "null"] },
+          "trainer": { "type": ["string", "null"] },
+          "odds": {
+            "type": ["object", "null"],
+            "description": "Current odds captured at a point in time. Never the historical SP.",
+            "required": [],
+            "properties": {
+              "fractional": { "type": ["string", "null"] },
+              "decimal": { "type": ["number", "null"] },
+              "capturedAt": { "type": ["string", "null"], "format": "date-time" }
+            }
+          },
+          "sp": {
+            "type": ["object", "null"],
+            "description": "Historical starting price. Kept separate from current odds.",
+            "properties": {
+              "fractional": { "type": ["string", "null"] },
+              "decimal": { "type": ["number", "null"] },
+              "capturedAt": { "type": ["string", "null"], "format": "date-time" }
+            }
+          },
+          "finishPosition": { "type": ["integer", "null"], "minimum": 1 },
+          "resultStatus": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

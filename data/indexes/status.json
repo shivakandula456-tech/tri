@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0.0",
+  "collectorEnabled": false,
+  "collectionMode": "disabled_pending_permission",
+  "parserValidatedAgainstLive": false,
+  "permissionStatus": "blocked_http_403_observed",
+  "permissionNotes": [
+    "2026-10-18: robots.txt for User-agent: * disallows /ajax/, /userlogin/, /user/login, /userprofile, /festivals/*/userprofile* and URLs containing showResult=yes. Paths under /racecards/ are not disallowed by robots.txt.",
+    "2026-10-18: Direct automated GET requests to https://www.attheraces.com/racecards and https://www.attheraces.com/racecards/2026-08-15 returned HTTP 403. Automated access is currently blocked by the site's protection layer.",
+    "Policy: bot protection is never bypassed. The scheduled workflow runs only the offline self-test until the repository variable COLLECTOR_ENABLED is set to true by a human after written permission is obtained and the parser probe has been reviewed.",
+    "The requested backtesting window 2026-08-01 to 2026-08-15 is historical. Whether the source exposes those pages to an approved collector is unverified; the probe must confirm it before any live run."
+  ],
+  "desiredWindow": {
+    "from": "2026-08-01",
+    "to": "2026-08-15"
+  },
+  "lastRun": null,
+  "observedAccess": null,
+  "runs": []
+}

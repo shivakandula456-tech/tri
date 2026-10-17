@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/atr-research/schema/fixtures-manifest.schema.json",
+  "title": "Test fixture manifest",
+  "description": "All fixture races are synthetic. They must be flagged testData=true and must never be presented as production data.",
+  "type": "object",
+  "required": ["datasetId", "testData", "generatedAt", "races"],
+  "properties": {
+    "datasetId": { "type": "string" },
+    "testData": { "const": true },
+    "generatedAt": { "type": "string" },
+    "generator": { "type": "string" },
+    "purpose": { "type": "string" },
+    "races": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["file", "raceId", "expected"],
+        "properties": {
+          "file": { "type": "string", "pattern": "^races/.*\\.json$" },
+          "raceId": { "type": "string" },
+          "expected": {
+            "type": "object",
+            "required": ["status"],
+            "properties": {
+              "status": { "enum": ["qualified", "rejected"] },
+              "rejectionCode": { "type": ["string", "null"] },
+              "candidateRunnerNumber": { "type": ["integer", "null"] }
+            }
+          }
+        }
+      }
+    }
+  }
+}

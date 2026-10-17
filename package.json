@@ -1,0 +1,18 @@
+{
+  "name": "atr-horse-racing-research",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Static ATR horse-racing research site with scheduled GitHub Actions collection under locked Phase 1 rules.",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "preview": "node tools/preview.js",
+    "collect": "node collector/src/collect.js",
+    "self-test": "node collector/src/collect.js --self-test",
+    "validate:data": "node collector/src/validate.js",
+    "validate:fixtures": "node collector/src/validate.js --fixtures-only"
+  }
+}

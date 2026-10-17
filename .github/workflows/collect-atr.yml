@@ -1,0 +1,116 @@
+name: Collect ATR (guarded)
+
+on:
+  schedule:
+    - cron: '17 6 * * *'
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Run mode
+        type: choice
+        options: [self-test, dry-run, probe, live]
+        default: self-test
+      from:
+        description: From date (YYYY-MM-DD, optional)
+        type: string
+        default: ''
+      to:
+        description: To date (YYYY-MM-DD, optional)
+        type: string
+        default: ''
+      max_races:
+        description: Maximum racecard pages this run
+        type: string
+        default: '10'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-atr
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    name: Collector
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Safety gate - tests must pass before any collection
+        run: npm test
+
+      - name: Resolve mode and arguments
+        id: resolve
+        shell: bash
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            MODE="${{ inputs.mode }}"
+          else
+            if [ "${{ vars.COLLECTOR_ENABLED }}" = "true" ]; then
+              MODE="live"
+            else
+              MODE="self-test"
+            fi
+          fi
+          FLAGS=""
+          if [ -n "${{ inputs.from }}" ]; then FLAGS="$FLAGS --from ${{ inputs.from }}"; fi
+          if [ -n "${{ inputs.to }}" ]; then FLAGS="$FLAGS --to ${{ inputs.to }}"; fi
+          if [ -n "${{ inputs.max_races }}" ]; then FLAGS="$FLAGS --max-races ${{ inputs.max_races }}"; fi
+          if [ "$MODE" = "live" ] && [ "${{ vars.COLLECTOR_ENABLED }}" != "true" ]; then
+            echo "::error::Live collection is refused: set the repository variable COLLECTOR_ENABLED to true only after written permission and a reviewed probe run."
+            exit 1
+          fi
+          if [ "$MODE" != "live" ] && [ "$MODE" != "self-test" ] && [ "${{ vars.COLLECTOR_ENABLED }}" != "true" ]; then
+            echo "::error::Network modes (dry-run, probe) also require COLLECTOR_ENABLED=true so access is always deliberate."
+            exit 1
+          fi
+          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
+          echo "flags=$FLAGS" >> "$GITHUB_OUTPUT"
+
+      - name: Run collector (${{ steps.resolve.outputs.mode }})
+        shell: bash
+        env:
+          COLLECTOR_LIVE_CONFIRMED: ${{ steps.resolve.outputs.mode == 'live' && vars.COLLECTOR_ENABLED == 'true' && '1' || '0' }}
+        run: |
+          node collector/src/collect.js --${{ steps.resolve.outputs.mode }} ${{ steps.resolve.outputs.flags }}
+
+      - name: Upload run artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: collector-report-${{ github.run_number }}
+          path: |
+            collector/tmp/**
+          if-no-files-found: ignore
+
+      - name: Publish run summary
+        if: always()
+        shell: bash
+        run: |
+          if [ -f collector/tmp/summary.md ]; then
+            cat collector/tmp/summary.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No summary was produced (the run stopped before writing artifacts)." >> "$GITHUB_STEP_SUMMARY"
+          fi
+
+      - name: Commit published data
+        if: steps.resolve.outputs.mode == 'live'
+        shell: bash
+        run: |
+          if [ -z "$(git status --porcelain data/)" ]; then
+            echo "No data changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/
+          git commit -m "chore(data): collection run $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push

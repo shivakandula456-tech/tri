@@ -1,0 +1,33 @@
+{
+  "raceId": "FIX-2026-08-05-FIXCOLLEGE-1500-IRE-C4",
+  "dataset": "test-fixture",
+  "testData": true,
+  "source": "test-fixture-generator",
+  "sourceUrl": null,
+  "retrievedAt": "2026-08-05T17:00:00Z",
+  "parserVersion": "fixture-generator-1.0.0",
+  "date": "2026-08-05",
+  "time": "15:00",
+  "course": "Fixcollege (TEST, Ireland)",
+  "courseRegion": "IRE",
+  "raceType": "Flat",
+  "isHandicap": true,
+  "class": 4,
+  "name": "Synthetic Test Handicap (Fixture I, non-GB venue)",
+  "distance": "1m",
+  "going": "Good (fixture)",
+  "declaredRunners": 7,
+  "actualRunners": 7,
+  "resultStatus": "unresolved",
+  "resultsRetrievedAt": null,
+  "runners": [
+    { "runnerNumber": 1, "name": "Fixture Rua", "status": "runner", "odds": { "fractional": "2/1", "decimal": 3, "capturedAt": "2026-08-05T14:20:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey A", "trainer": "Test Trainer A" },
+    { "runnerNumber": 2, "name": "Fixture Glas", "status": "runner", "odds": { "fractional": "4/1", "decimal": 5, "capturedAt": "2026-08-05T14:20:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey B", "trainer": "Test Trainer B" },
+    { "runnerNumber": 3, "name": "Fixture Gorm", "status": "runner", "odds": { "fractional": "6/1", "decimal": 7, "capturedAt": "2026-08-05T14:20:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey C", "trainer": "Test Trainer C" },
+    { "runnerNumber": 4, "name": "Fixture Dubh", "status": "runner", "odds": { "fractional": "8/1", "decimal": 9, "capturedAt": "2026-08-05T14:20:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey D", "trainer": "Test Trainer D" },
+    { "runnerNumber": 5, "name": "Fixture Ban", "status": "runner", "odds": { "fractional": "12/1", "decimal": 13, "capturedAt": "2026-08-05T14:20:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey E", "trainer": "Test Trainer E" },
+    { "runnerNumber": 6, "name": "Fixture Dearg", "status": "runner", "odds": { "fractional": "16/1", "decimal": 17, "capturedAt": "2026-08-05T14:20:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey F", "trainer": "Test Trainer F" },
+    { "runnerNumber": 7, "name": "Fixture Liath", "status": "runner", "odds": { "fractional": "25/1", "decimal": 26, "capturedAt": "2026-08-05T14:20:00Z" }, "sp": null, "finishPosition": null, "resultStatus": null, "jockey": "Test Jockey G", "trainer": "Test Trainer G" }
+  ],
+  "validation": { "status": "passed", "checks": [], "validatedAt": "2026-08-05T17:00:00Z" }
+}

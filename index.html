@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ATR Phase 1 Research</title>
+  <meta name="description" content="Private research dashboard for the locked Phase 1 racing ruleset. Static site; no data leaves the browser.">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#view">Skip to content</a>
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-mark">P1</span>
+      <span class="brand-text">ATR Phase 1 Research</span>
+    </div>
+    <nav class="nav" id="nav" aria-label="Main"></nav>
+  </header>
+  <div id="banners"></div>
+  <main class="container" id="view" tabindex="-1"></main>
+  <footer class="app-footer">
+    <p>Personal research tool. Not betting advice. No money is staked, tracked or implied anywhere in this project.</p>
+    <p>Data shown may include clearly labelled synthetic test fixtures. Collection runs only when the repository owner has enabled it, and never bypasses anti-bot protection.</p>
+  </footer>
+  <div id="toast-region" class="toast-region" aria-live="polite"></div>
+  <noscript><p class="noscript">This dashboard needs JavaScript. Nothing is sent anywhere; everything runs in your browser.</p></noscript>
+  <script>
+    if (location.protocol === 'file:') {
+      var view = document.getElementById('view');
+      if (view) {
+        view.innerHTML =
+          '<div class="notice notice-bad" style="max-width:72ch">' +
+          '<strong>This page must be opened over HTTP, not by double-clicking the file.</strong><br>' +
+          'Browsers block JavaScript modules and local data files on <code>file://</code> pages, so the dashboard cannot start this way. ' +
+          'From the project folder run <code>npm run preview</code> and open <code>http://localhost:4173/</code>, ' +
+          'or use the deployed GitHub Pages URL. See README.md for details.' +
+          '</div>';
+      }
+    }
+  </script>
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

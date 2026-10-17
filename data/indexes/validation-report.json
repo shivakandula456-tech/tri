@@ -1,0 +1,27 @@
+{
+  "status": "not_run",
+  "generatedAt": null,
+  "parserVersion": null,
+  "mode": null,
+  "published": {
+    "races": 0,
+    "files": 0
+  },
+  "fixtures": {
+    "races": 0,
+    "files": 0
+  },
+  "index": {
+    "status": "not_checked",
+    "races": 0
+  },
+  "statusFile": {
+    "status": "not_checked",
+    "runs": 0
+  },
+  "byCode": {},
+  "issues": {
+    "errors": [],
+    "warnings": []
+  }
+}

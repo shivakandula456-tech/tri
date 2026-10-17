@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/atr-research/schema/status.schema.json",
+  "title": "ATR research collection status",
+  "type": "object",
+  "required": ["collectorEnabled", "parserValidatedAgainstLive", "permissionStatus", "runs"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "collectorEnabled": { "type": "boolean", "description": "Human-controlled switch. Stays false until ATR permission is confirmed and a probe verified the parser." },
+    "collectionMode": { "type": "string" },
+    "parserValidatedAgainstLive": { "type": "boolean" },
+    "permissionStatus": { "type": "string" },
+    "permissionNotes": { "type": "array", "items": { "type": "string" } },
+    "desiredWindow": {
+      "type": "object",
+      "properties": {
+        "from": { "type": "string" },
+        "to": { "type": "string" }
+      }
+    },
+    "lastRun": { "type": ["object", "null"] },
+    "observedAccess": {
+      "type": ["object", "null"],
+      "properties": {
+        "checkedAt": { "type": ["string", "null"] },
+        "blocked": { "type": "boolean" },
+        "reason": { "type": ["string", "null"] },
+        "status": { "type": "string" }
+      }
+    },
+    "runs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["runId"],
+        "properties": {
+          "runId": { "type": "string" },
+          "mode": { "type": "string" },
+          "startedAt": { "type": ["string", "null"] },
+          "finishedAt": { "type": ["string", "null"] },
+          "status": { "type": "string" },
+          "blocked": { "type": "boolean" },
+          "blockedReason": { "type": ["string", "null"] },
+          "exitCode": { "type": ["integer", "null"] },
+          "dates": { "type": "array" },
+          "counts": { "type": "object" },
+          "failures": { "type": "array" },
+          "notes": { "type": "array" }
+        }
+      }
+    }
+  }
+}

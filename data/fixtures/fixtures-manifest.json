@@ -1,0 +1,142 @@
+{
+  "datasetId": "atr-phase1-fixtures",
+  "testData": true,
+  "generatedAt": "2026-08-08T00:00:00Z",
+  "generator": "fixture-generator-1.0.0",
+  "purpose": "Exercise every Phase 1 rule path, boundary and tie-break with synthetic data. Evaluations are verified by test/fixtures.test.js.",
+  "races": [
+    {
+      "file": "races/FIX-2026-08-01-FIXTON-1410-C4.json",
+      "raceId": "FIX-2026-08-01-FIXTON-1410-C4",
+      "description": "Fully qualifying race; resolved with candidate winning",
+      "expected": {
+        "status": "qualified",
+        "rejectionCode": null,
+        "candidateRunnerNumber": 3,
+        "favouriteRunnerNumber": 1,
+        "resultStatus": "resolved",
+        "candidateFinishPosition": 1,
+        "favouriteFinishPosition": 3
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-01-FIXTON-1510-C5-NR.json",
+      "raceId": "FIX-2026-08-01-FIXTON-1510-C5-NR",
+      "description": "Non-runners; favourite exactly 5/2 and candidate exactly 10/1, both boundary-inclusive",
+      "expected": {
+        "status": "qualified",
+        "rejectionCode": null,
+        "candidateRunnerNumber": 4,
+        "favouriteRunnerNumber": 1,
+        "resultStatus": "unresolved",
+        "candidateFinishPosition": null,
+        "favouriteFinishPosition": null
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-02-FIXMOOR-1420-C3-NOFAV.json",
+      "raceId": "FIX-2026-08-02-FIXMOOR-1420-C3-NOFAV",
+      "description": "Shortest price is 3/1, above the 5/2 favourite ceiling",
+      "expected": {
+        "status": "rejected",
+        "rejectionCode": "NO_STRONG_FAVOURITE",
+        "candidateRunnerNumber": null
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-02-FIXMOOR-1520-C4-TWOFAV.json",
+      "raceId": "FIX-2026-08-02-FIXMOOR-1520-C4-TWOFAV",
+      "description": "Two runners at or below 5/2",
+      "expected": {
+        "status": "rejected",
+        "rejectionCode": "MULTIPLE_STRONG_FAVOURITES",
+        "candidateRunnerNumber": null
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-03-FIXBRIDGE-1400-C6-SMALL.json",
+      "raceId": "FIX-2026-08-03-FIXBRIDGE-1400-C6-SMALL",
+      "description": "Six declared, one non-runner, five actually run",
+      "expected": {
+        "status": "rejected",
+        "rejectionCode": "FIELD_SIZE_OUT_OF_RANGE",
+        "candidateRunnerNumber": null
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-03-FIXBRIDGE-1500-C2-LARGE.json",
+      "raceId": "FIX-2026-08-03-FIXBRIDGE-1500-C2-LARGE",
+      "description": "Thirteen actual runners, one above the ceiling",
+      "expected": {
+        "status": "rejected",
+        "rejectionCode": "FIELD_SIZE_OUT_OF_RANGE",
+        "candidateRunnerNumber": null
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-04-FIXTON-1430-C5-NONHCP.json",
+      "raceId": "FIX-2026-08-04-FIXTON-1430-C5-NONHCP",
+      "description": "Everything qualifies except it is not a handicap",
+      "expected": {
+        "status": "rejected",
+        "rejectionCode": "NOT_HANDICAP",
+        "candidateRunnerNumber": null
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-04-FIXDOWNS-1440-C4-HURDLE.json",
+      "raceId": "FIX-2026-08-04-FIXDOWNS-1440-C4-HURDLE",
+      "description": "Everything qualifies except it is a Hurdle",
+      "expected": {
+        "status": "rejected",
+        "rejectionCode": "NOT_FLAT",
+        "candidateRunnerNumber": null
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-05-FIXCOLLEGE-1500-IRE-C4.json",
+      "raceId": "FIX-2026-08-05-FIXCOLLEGE-1500-IRE-C4",
+      "description": "Everything qualifies except the venue is outside Great Britain",
+      "expected": {
+        "status": "rejected",
+        "rejectionCode": "NOT_GREAT_BRITAIN",
+        "candidateRunnerNumber": null
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-05-FIXTON-1520-C1.json",
+      "raceId": "FIX-2026-08-05-FIXTON-1520-C1",
+      "description": "Everything qualifies except class 1 is excluded",
+      "expected": {
+        "status": "rejected",
+        "rejectionCode": "CLASS_OUT_OF_RANGE",
+        "candidateRunnerNumber": null
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-06-FIXTON-1530-C4-TIE.json",
+      "raceId": "FIX-2026-08-06-FIXTON-1530-C4-TIE",
+      "description": "Two longshots tied at 14/1; tie-break picks the lower runner number; resolved",
+      "expected": {
+        "status": "qualified",
+        "rejectionCode": null,
+        "candidateRunnerNumber": 2,
+        "favouriteRunnerNumber": 1,
+        "resultStatus": "resolved",
+        "candidateFinishPosition": 2,
+        "favouriteFinishPosition": 1,
+        "tieBreakApplied": true
+      }
+    },
+    {
+      "file": "races/FIX-2026-08-07-FIXTON-1540-C4-MISSINGODDS.json",
+      "raceId": "FIX-2026-08-07-FIXTON-1540-C4-MISSINGODDS",
+      "description": "One active runner has no captured price",
+      "expected": {
+        "status": "rejected",
+        "rejectionCode": "INCOMPLETE_ODDS",
+        "candidateRunnerNumber": null
+      }
+    }
+  ]
+}

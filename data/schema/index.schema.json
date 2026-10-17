@@ -1,0 +1,78 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/atr-research/schema/index.schema.json",
+  "title": "ATR research races index",
+  "type": "object",
+  "required": ["schemaVersion", "datasetStatus", "counts", "races"],
+  "properties": {
+    "schemaVersion": { "type": "string" },
+    "datasetStatus": { "enum": ["not_collected", "collecting", "partial", "published"] },
+    "collectorVersion": { "type": ["string", "null"] },
+    "parserVersion": { "type": ["string", "null"] },
+    "generatedAt": { "type": ["string", "null"], "format": "date-time" },
+    "window": {
+      "type": "object",
+      "properties": {
+        "requestedFrom": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+        "requestedTo": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "required": ["races"],
+      "properties": {
+        "races": { "type": "integer", "minimum": 0 },
+        "qualified": { "type": "integer", "minimum": 0 },
+        "rejected": { "type": "integer", "minimum": 0 },
+        "resolvedResults": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "properties": {
+        "daysWithData": { "type": "array", "items": { "type": "string" } },
+        "daysWithoutData": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "integrity": {
+      "type": "object",
+      "properties": {
+        "structuralHash": { "type": ["string", "null"] },
+        "lastValidatedAt": { "type": ["string", "null"] },
+        "status": { "type": "string" }
+      }
+    },
+    "races": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["raceId", "date", "course", "status", "path"],
+        "properties": {
+          "raceId": { "type": "string" },
+          "date": { "type": "string" },
+          "time": { "type": ["string", "null"] },
+          "course": { "type": "string" },
+          "raceType": { "type": ["string", "null"] },
+          "isHandicap": { "type": "boolean" },
+          "class": { "type": ["integer", "null"] },
+          "raceName": { "type": ["string", "null"] },
+          "declaredRunners": { "type": "integer" },
+          "actualRunners": { "type": "integer" },
+          "nonRunners": { "type": "integer" },
+          "status": { "enum": ["qualified", "rejected"] },
+          "rejectionCode": { "type": ["string", "null"] },
+          "favouriteRunnerNumber": { "type": ["integer", "null"] },
+          "favouriteDecimal": { "type": ["number", "null"] },
+          "candidateRunnerNumber": { "type": ["integer", "null"] },
+          "candidateName": { "type": ["string", "null"] },
+          "candidateDecimal": { "type": ["number", "null"] },
+          "resultStatus": { "type": "string" },
+          "validationStatus": { "type": "string" },
+          "path": { "type": "string", "pattern": "^data/races/" },
+          "sourceUrl": { "type": ["string", "null"] },
+          "retrievedAt": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}

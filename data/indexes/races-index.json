@@ -1,0 +1,27 @@
+{
+  "schemaVersion": "1.0.0",
+  "datasetStatus": "not_collected",
+  "collectorVersion": "0.1.0",
+  "parserVersion": null,
+  "generatedAt": null,
+  "window": {
+    "requestedFrom": "2026-08-01",
+    "requestedTo": "2026-08-15"
+  },
+  "counts": {
+    "races": 0,
+    "qualified": 0,
+    "rejected": 0,
+    "resolvedResults": 0
+  },
+  "coverage": {
+    "daysWithData": [],
+    "daysWithoutData": []
+  },
+  "integrity": {
+    "structuralHash": null,
+    "lastValidatedAt": null,
+    "status": "not_run"
+  },
+  "races": []
+}
